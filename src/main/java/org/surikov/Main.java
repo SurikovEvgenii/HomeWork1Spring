@@ -1,5 +1,6 @@
 package org.surikov;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.surikov.time.GetDayName;
 
@@ -8,11 +9,15 @@ import java.util.Locale;
 
 public class Main {
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        GetDayName getDayName = context.getBean("getTime", GetDayName.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+
+        GetDayName getDayNameEnglish = context.getBean("getDayNameEnglish", GetDayName.class);
+        GetDayName getDayNameGerman = context.getBean("getDayNameGerman", GetDayName.class);
+        GetDayName getDayNameItalian = context.getBean("getDayNameItalian", GetDayName.class);
         System.out.println("Today is:");
-        System.out.println("ENGLISH: " + getDayName.getTime(LocalDate.now(), Locale.ENGLISH));
-        System.out.println("ITALIAN: " + getDayName.getTime(LocalDate.now(), Locale.ITALIAN));
-        System.out.println("GERMAN: " + getDayName.getTime(LocalDate.now(), Locale.GERMAN));
+        System.out.println("ENGLISH: " + getDayNameEnglish.getTime());
+        System.out.println("ITALIAN: " + getDayNameGerman.getTime());
+        System.out.println("GERMAN: " + getDayNameItalian.getTime());
+        context.close();
     }
 }

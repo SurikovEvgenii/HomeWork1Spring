@@ -8,6 +8,4 @@ http://www.springframework.org/schema/context  http://www.springframework.org/sc
 
     <context:component-scan base-package="org.surikov.time"/>
 
-    <bean id="getTime" class="org.surikov.time.GetDayName"/>
-
 </beans>
